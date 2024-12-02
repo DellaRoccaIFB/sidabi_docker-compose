@@ -17,7 +17,7 @@ fi
 echo "Container found: $CONTAINER_ID"
 
 echo "Starting database backup..."
-docker exec -it $CONTAINER_ID bash -c "pg_dump -U $POSTGRES_USER -d $POSTGRES_DB -F c -b -v -f /var/backups/backup.dump"
+docker exec -it $CONTAINER_ID bash -c 'pg_dump -U $POSTGRES_USER -d $POSTGRES_DB -F c -b -v -f /var/backups/backup.dump'
 
 if [[ $? -eq 0 ]]; then
     echo "Database backup completed successfully."

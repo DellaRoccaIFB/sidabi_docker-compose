@@ -1,18 +1,13 @@
 services:
   sidabi_db:
     container_name: sidabi_database
+    image: postgres:13.18
     restart: always
-    build: 
-      context: ./database_postgres
-      dockerfile: Dockerfile
-    # image: postgres:16
-    # healthcheck:
-    #   test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 5
-    ports:
-      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     expose:
       - 5432
     environment:
@@ -21,8 +16,10 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - ./database_postgres/pg_data:/var/lib/postgresql/data/
-      # - ./database_postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database_postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./database_postgres/pg_dump:/var/backups
+    networks:
+      - sidabi_network
 
 
   sidabi_app:
@@ -30,6 +27,11 @@ services:
     build:
       context: ./sidabi_app
       dockerfile: Dockerfile
+    healthcheck: 
+      test: ["CMD-SHELL", "pg_isready -h $DB_HOST -p $DB_PORT -U $POSTGRES_USER"] 
+      interval: 30s 
+      timeout: 10s 
+      retries: 3
     ports:
       - 80:80
     expose:
@@ -38,7 +40,7 @@ services:
       - .:/var/www/html
     depends_on:
       sidabi_db:
-        condition: service_started
+        condition: service_healthy
     env_file:
       - .env
     networks:
@@ -46,4 +48,3 @@ services:
 
 networks:
   sidabi_network:
-    driver: bridge
