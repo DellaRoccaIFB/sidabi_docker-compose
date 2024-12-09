@@ -1,0 +1,18 @@
+tags:
+  - Sensor
+summary: List all collection sessions files from a patient
+description:   "List the collection sessions files from a patient related to the logged client. Receive 2 parameters: id and loginId. Id is the identificator of a patient and loginId is the identificator of a logged client."
+produces:
+  - application/json
+parameters:
+  - in: path
+    name: id
+    description: ID of the patient.
+    required: true
+  - in: path
+    name: loginId
+    description: ID of the logged client.
+    required: true
+responses:
+  200:
+    description: Success

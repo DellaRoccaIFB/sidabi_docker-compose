@@ -1,0 +1,14 @@
+tags:
+  - Core
+summary: Search all patients that have UPDRS assess
+description: "Search all patients that have UPDRS assess. It receives one parameter: loginId, which is the loggedClient ID"
+produces:
+  - application/json
+parameters:
+  - in: path
+    name: loginId
+    description: ID of the logged client.
+    required: true
+responses:
+  200:
+    description: Success

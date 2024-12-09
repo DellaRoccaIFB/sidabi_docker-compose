@@ -1,0 +1,14 @@
+tags:
+  - Core
+summary: Search a participant by id field.
+description: "Search a participant using the id field, this field is a unique identification of the patient entity"
+produces:
+  - application/json
+parameters:
+  - in: path
+    name: id
+    description: ID of the patient.
+    required: true
+responses:
+  200:
+    description: Success

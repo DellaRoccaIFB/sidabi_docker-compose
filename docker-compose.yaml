@@ -19,8 +19,7 @@ services:
       - ./database_postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./database_postgres/pg_dump:/var/backups
     networks:
-      - sidabi_network
-
+      - sidabi_server
 
   sidabi_app:
     container_name: sidabi_application
@@ -44,7 +43,46 @@ services:
     env_file:
       - .env
     networks:
-      - sidabi_network
+      - sidabi_server
+
+  dashboard_api:
+    container_name: dashboard_api
+    build:
+      context: ./dashboard_api
+      dockerfile: Dockerfile
+    depends_on:
+      sidabi_app:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - SECRET_KEY=${SECRET_KEY}
+      - FILE_LOCATION=${FILE_LOCATION}
+    ports:
+      - 5000:5000
+    expose:
+      - 5000
+    volumes:
+      - ./dashboard_api/parkinson_files:/var/files
+    networks:
+      - sidabi_server
+      - dashboard_network
+
+  dashboard_frontend:
+    container_name: dashboard_frontend
+    build:
+      context: ./dashboard_frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - dashboard_api
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    networks:
+      - dashboard_network
 
 networks:
-  sidabi_network:
+  sidabi_server:
+    driver: bridge
+  dashboard_network:
+    driver: bridge

@@ -1,0 +1,26 @@
+tags:
+  - Scales
+summary: Get the the sum os selecioned scales.
+description:   "Get the the sum os selecioned scales to the logged client. Receive 2 required parameters: id and loginId. Id is the identificator of a patient and loginId is the identificator of a logged client. Receive 2 optionals parameters: groupName and stimulus. groupName is the study group in which the patient is inserted and stimulus refers to how the patient's stimulus is at the time of the test."
+produces:
+  - application/json
+parameters:
+  - in: path
+    name: loginId
+    description: ID of the logged client.
+    required: true
+  - in: path
+    name: scaleId
+    description: ID of the scale.
+    required: true
+  - in: path
+    name: groupName
+    description: Name of the gorup selected "Grupo de Controle ou Grupo Experimental", if empty or different from "Grupo de Controle" and "Grupo Experimental", returns all group types".
+    required: false
+  - in: path
+    name: stimulus
+    description: Inform the patient's stimulus at the time of the evaluation, being 0 for "Without stimulus" and 1 for "With stimulus", if it is empty or different from 0 and 1, it returns all types of evaluation.
+    required: false
+responses:
+  200:
+    description: Success

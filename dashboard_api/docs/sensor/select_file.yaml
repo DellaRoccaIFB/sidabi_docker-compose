@@ -1,0 +1,13 @@
+tags:
+  - Sensor
+summary: Seleciona um arquivo para processar os dados
+description: Seleciona um arquivo para fazer o processamento dos dados e retorna os níveis de tremor e estatísticas descritivas
+parameters:
+  - in: query
+    name: filename
+    type: string
+    required: true
+responses:
+  200:
+    description: Success
+

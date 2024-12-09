@@ -1,0 +1,18 @@
+tags:
+  - Scales
+summary: List all scales on which the patient was assessed.
+description:   "List all scales on which the patient was assessed related to the logged client. Receive 2 parameters: id and loginId. Id is the identificator of a patient and loginId is the identificator of a logged client."
+produces:
+  - application/json
+parameters:
+  - in: path
+    name: loginId
+    description: ID of the logged client.
+    required: true
+  - in: path
+    name: patientId
+    description: ID of the patient.
+    required: true
+responses:
+  200:
+    description: Success

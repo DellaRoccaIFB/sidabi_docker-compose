@@ -1,0 +1,17 @@
+
+tags:
+  - Core
+summary: Verify and authenticate user
+description:   "Verify if the user exists and create a bearer token for him."
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: header
+    name: authorization
+    type: string
+    description: Bearer token for username and password.
+responses:
+  200:
+    description: Success

@@ -1,0 +1,14 @@
+tags:
+  - Scales
+summary: Get all scales.
+description: "Get all scales trademarks in sidabi. Receive 1 parameter: loginId. The loginId is the identificator of a logged client."
+produces:
+  - application/json
+parameters:
+  - in: path
+    name: loginId
+    description: ID of the logged client.
+    required: true
+responses:
+  200:
+    description: Success

@@ -1,0 +1,22 @@
+tags:
+  - Scales
+summary: Get Scale parts score from Model Circumplex of Affect.
+description: "Returns all Scale parts score and the total score from a patient."
+produces:
+  - application/json
+parameters:
+  - in: path
+    name: loginId
+    description: ID of the logged client.
+    required: true
+  - in: path
+    name: patientId
+    description: ID of the patient.
+    required: true
+  - in: path
+    name: stimulus
+    description: Inform the patient's stimulus at the time of the evaluation, being 0 for "Without stimulus" and 1 for "With stimulus", if it is empty or different from 0 and 1, it returns all types of evaluation.
+    required: false
+responses:
+  200:
+    description: Success

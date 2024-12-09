@@ -1,0 +1,18 @@
+tags:
+  - Assess
+summary: Get UPDRS parts score.
+description: "Returns all UPDRS parts score and the total score from a patient."
+produces:
+  - application/json
+parameters:
+  - in: path
+    name: loginId
+    description: ID of the logged client.
+    required: true
+  - in: path
+    name: patientId
+    description: ID of the patient.
+    required: true
+responses:
+  200:
+    description: Success
